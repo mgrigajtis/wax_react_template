@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import App from './App';
 import Store from './GlobalState/Store';
 import reportWebVitals from './reportWebVitals';
-import { UserService } from './UserService';
+import { WaxLoginService } from './WaxLoginService';
 
-UserService.init();
+WaxLoginService.init();
 
 ReactDOM.render(
   <React.StrictMode>

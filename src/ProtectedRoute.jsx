@@ -1,12 +1,12 @@
 import { Redirect, Route } from 'react-router-dom';
 import React from 'react';
-import { UserService } from './UserService';
+import { WaxLoginService } from './WaxLoginService';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route {...rest} render={
             props => {
-                if (UserService.isLogged()) {
+                if (WaxLoginService.isLogged()) {
                     return <Component {...rest} {...props} />
                 } else {
                     return <Redirect to={

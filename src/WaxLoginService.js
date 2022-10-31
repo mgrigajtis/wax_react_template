@@ -2,14 +2,13 @@ import { UALJs } from 'ual-plainjs-renderer';
 import { Wax } from '@eosdacio/ual-wax';
 import { isEmpty } from 'lodash';
 import { Anchor } from 'ual-anchor';
-
 import {storeAppDispatch} from './GlobalState/Store';
-import { setPlayerBalance, setPlayerData, setPlayerLogout } from './GlobalState/UserReducer';
+import { setPlayerBalance, setPlayerData, setPlayerLogout } from './GlobalState/WaxReducer';
 
 /**
  * Class to manage user data; it will be saved on Login and deleted on Logout
  */
-export class User {
+export class Waxp {
 
     appName = 'ual_template';
 
@@ -46,10 +45,10 @@ export class User {
     session = undefined;
 
     // Current balance
-    userBalance = 0;
+    waxBalance = 0;
 
     // Callback to refer to successful login
-    callbackServerUserData = undefined;
+    callbackServerWaxData = undefined;
 
     getName() {
         return this.authName;
@@ -59,7 +58,7 @@ export class User {
         const ualButton = document.querySelector(".ual-button-gen");
         ualButton.click();
 
-        this.callbackServerUserData = callback;
+        this.callbackServerWaxData = callback;
     }
 
     isLogged() {
@@ -71,7 +70,7 @@ export class User {
         console.log("Logout");
         this.authName = undefined;
         this.session = undefined;
-        
+
         this.ual.logoutUser();
 
         storeAppDispatch(setPlayerLogout());
@@ -82,12 +81,12 @@ export class User {
     }
 
     // UAL API call response
-    async ualCallback(userObject) {
+    async ualCallback(waxObject) {
 
-        this.session = userObject[0];
+        this.session = waxObject[0];
         this.serviceLoginName = this.session.constructor.name;
         this.authName = this.session.accountName;
-        
+
         storeAppDispatch(setPlayerData({
             name: this.authName,
             isLogged: this.isLogged(),
@@ -95,7 +94,7 @@ export class User {
         }));
 
         this.getBalance();
-        
+
         if(this.callbackServerUserData !== undefined) {
             this.callbackServerUserData();
         }
@@ -104,13 +103,13 @@ export class User {
     getBalance() {
         const balance = this.session.rpc.get_account(this.authName);
         balance.then((balance) => {
-            this.balance = balance.core_liquid_balance; 
+            this.balance = balance.core_liquid_balance;
             storeAppDispatch(setPlayerBalance((this.balance !== undefined) ? this.balance : 0));
         });
         return balance;
     }
 
-    // UserService init called to prepare UAL Login.
+    // WaxService init called to prepare UAL Login.
     init() {
         // Binding:
         this.ualCallback = this.ualCallback.bind(this);
@@ -129,12 +128,12 @@ export class User {
     }
 
     static new() {
-        if (!User.instance) {
-            User.instance = new User();
+        if (!Waxp.instance) {
+            Waxp.instance = new Waxp();
         }
 
-        return User.instance;
+        return Waxp.instance;
     }
 }
 
-export const UserService = User.new();
+export const WaxLoginService = Waxp.new();

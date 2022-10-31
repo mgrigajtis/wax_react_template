@@ -6,8 +6,8 @@ const initialState = {
     balance: 0
 };
 
-const user = createSlice({
-    name: 'user',
+const wax = createSlice({
+    name: 'wax',
     initialState,
     reducers: {
         setPlayerData: (state, action) => (action.payload),
@@ -16,5 +16,5 @@ const user = createSlice({
     }
 });
 
-export const { setPlayerData, setPlayerLogout, setPlayerBalance } = user.actions;
-export default user.reducer;
+export const { setPlayerData, setPlayerLogout, setPlayerBalance } = wax.actions;
+export default wax.reducer;

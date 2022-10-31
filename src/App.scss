@@ -13,7 +13,7 @@ body {
   background-color: #222f3e;
   width: 100%;
   height: 100vh;
-  background-image: url("./images/3DK_LOGO.png");
+  background-image: url("./images/Arch_Logo_545x545.png");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -25,7 +25,8 @@ $heightMenu: 50px;
   .btn-item {
     background-color: #11171f;
     text-align: center;
-    width: 100px;
+    padding-left: 1em;
+    padding-right: 1em;
     height: $heightMenu;
     line-height: $heightMenu;
     border-right: 1px solid #ff9f43;

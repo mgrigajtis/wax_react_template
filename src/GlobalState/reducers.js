@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import user from './UserReducer';
+import wax from './WaxReducer';
 export const rootReducer = combineReducers({
-    user
+    wax
 });

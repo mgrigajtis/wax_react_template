@@ -1,20 +1,20 @@
 import React from 'react';
-import { UserService } from '../UserService';
+import { WaxLoginService } from '../WaxLoginService';
 
 export const Page2 = () => {
 
     const onHandleSendWax = () => {
-        UserService.session.signTransaction(
+        WaxLoginService.session.signTransaction(
             {
                 actions: [{
                     account: 'eosio.token',
                     name: 'transfer',
                     authorization: [{
-                        actor: UserService.authName,
+                        actor: WaxLoginService.authName,
                         permission: 'active'
                     }],
                     data: {
-                        from: UserService.authName,
+                        from: WaxLoginService.authName,
                         to: '3dkrenderwax',
                         quantity: '1.00000000 WAX',
                         memo: 'This works!'
@@ -27,7 +27,7 @@ export const Page2 = () => {
             }
         ).then((response) => {
             if(response.status === 'executed') {
-                UserService.getBalance();
+                WaxLoginService.getBalance();
             }
         });
 
